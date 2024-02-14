@@ -1,7 +1,7 @@
 from src.shared.interfaces import IUseCase, IFileAdapter
 from typing import TypedDict
 
-from ..interfaces import IContextualImageProcessor
+from src.modules.image_processing.interfaces import IContextualImageProcessor
 
 
 class Params(TypedDict):
