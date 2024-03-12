@@ -5,7 +5,12 @@ from datetime import datetime
 from src.shared.types import OpenCVImage
 from src.shared.interfaces import IFileAdapter
 from src.shared.errors import ValidationError, NotFoundError, ConflictError
-from typing import Any
+from typing import Any, TypedDict
+from typing_extensions import NotRequired
+
+
+class SaveParams(TypedDict):
+    destination: NotRequired[str]
 
 
 class LocalFileAdapter(IFileAdapter):
@@ -16,8 +21,10 @@ class LocalFileAdapter(IFileAdapter):
             raise NotFoundError('Failed to read image from source path')
         return image
 
-    def save_image(self, image: OpenCVImage) -> str:
-        destination = self._get_destination_path()
+    def save_image(self, image: OpenCVImage, saveParams: SaveParams = {}) -> str:
+        destination = saveParams.get('destination')
+        if not destination:
+            destination = self._get_destination_path()
         success = cv2.imwrite(destination, image)
         if not success:
             raise ConflictError('Failed to write image to destination path')
@@ -25,7 +32,7 @@ class LocalFileAdapter(IFileAdapter):
 
     def _get_destination_path(self) -> str:
         root = os.getcwd()
-        sub_directory = 'resources/processed_images'
+        sub_directory = 'tests/resources/processed_images'
         full_directory_path = os.path.join(root, sub_directory)
 
         if not os.path.exists(full_directory_path):
