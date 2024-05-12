@@ -4,16 +4,21 @@ version = "0.1.0"
 description = ""
 authors = ["Mateus Aguiar <aguiar_m@ymail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.26.4"
-opencv-python = "^4.9.0.80"
 pytesseract = "^0.3.10"
 imutils = "^0.5.4"
+typing-extensions = "^4.10.0"
+opencv-python = "^4.9.0.80"
+pyexiv2 = "^2.12.0"
+pydantic = "^2.7.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
+ipykernel = "^6.29.4"
 
 [build-system]
 requires = ["poetry-core"]
