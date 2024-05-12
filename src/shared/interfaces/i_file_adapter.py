@@ -1,13 +1,14 @@
 from abc import ABC, abstractmethod
-from src.shared.types import OpenCVImage
-from typing import Any
+
+from src.modules.image_orientation.domain.models.images import ImageData
+from src.modules.image_orientation.domain.models.paths import Path
 
 
 class IFileAdapter(ABC):
     @abstractmethod
-    def get_image(self, source: str) -> OpenCVImage:
+    def get_image(self, source: Path) -> ImageData:
         ...
 
     @abstractmethod
-    def save_image(self, image: OpenCVImage, saveParams: Any = {}) -> str:
+    def save_image(self, image: ImageData) -> str:
         ...
