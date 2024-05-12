@@ -1,1 +1,1 @@
-from images import OpenCVImage as OpenCVImage
+from .images import OpenCVImage as OpenCVImage
